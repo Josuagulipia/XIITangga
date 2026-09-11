@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ular Tangga Edukatif - Motif Dayak</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  </head>
+  <body>
+    <!-- OVERLAY SETUP PEMAIN -->
+    <div id="setup-modal" class="modal-overlay active">
+      <div class="modal-box setup-box">
+        <h1>🐍🎲 ULAR TANGGA EDUKATIF 🎲🪜</h1>
+        <p class="subtitle">
+          "Belajar, Menjawab, Bergerak, dan Menjadi Juara!"
+        </p>
+        <hr />
+
+        <div class="setting-item">
+          <label><strong>Jumlah Tim yang Bermain:</strong></label>
+          <select
+            id="team-count-select"
+            onchange="adjustTeamInputs(this.value)"
+          >
+            <option value="2">2 Tim</option>
+            <option value="3">3 Tim</option>
+            <option value="4" selected>4 Tim</option>
+          </select>
+        </div>
+
+        <div id="team-inputs-container">
+          <div class="input-group" id="group-p1">
+            <span class="badge team-1">🔵 Tim 1</span
+            ><input type="text" id="p1-name" value="Tim Garuda" />
+          </div>
+          <div class="input-group" id="group-p2">
+            <span class="badge team-2">🔴 Tim 2</span
+            ><input type="text" id="p2-name" value="Tim Rajawali" />
+          </div>
+          <div class="input-group" id="group-p3">
+            <span class="badge team-3">🟢 Tim 3</span
+            ><input type="text" id="p3-name" value="Tim Elang" />
+          </div>
+          <div class="input-group" id="group-p4">
+            <span class="badge team-4">🟡 Tim 4</span
+            ><input type="text" id="p4-name" value="Tim Merpati" />
+          </div>
+        </div>
+
+        <div class="setup-actions">
+          <button class="btn btn-primary" onclick="startGame()">
+            🎮 MULAI PERMAINAN
+          </button>
+          <button
+            class="btn btn-secondary"
+            onclick="toggleModal('instructions-modal', true)"
+          >
+            📖 PETUNJUK
+          </button>
+          <button
+            class="btn btn-secondary"
+            onclick="toggleModal('teacher-modal', true)"
+          >
+            👨‍🏫 MODE GURU
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN APP LAYOUT -->
+    <div class="app-container">
+      <header class="app-header">
+        <h2>🐍 ULAR TANGGA EDUKATIF</h2>
+        <div class="header-controls">
+          <button class="btn btn-sm" onclick="toggleDarkMode()">
+            <span id="dark-icon">🌙</span> DARK
+          </button>
+          <button class="btn btn-sm" onclick="toggleAudio()">
+            <span id="audio-icon">🔊</span> SUARA
+          </button>
+          <button class="btn btn-sm" onclick="togglePause()">
+            <span id="pause-icon">⏸️</span> PAUSE
+          </button>
+          <button
+            class="btn btn-sm"
+            onclick="toggleModal('teacher-modal', true)"
+          >
+            👨‍🏫 GURU
+          </button>
+          <button class="btn btn-sm btn-danger" onclick="confirmReset()">
+            🔄 RESET
+          </button>
+        </div>
+      </header>
+
+      <main class="game-layout">
+        <!-- PAPAN PERMAINAN -->
+        <div class="board-wrapper">
+          <div class="board-container" id="board-container">
+            <img
+              src="board.jfif"
+              id="board-img"
+              alt="Papan Ular Tangga"
+              onerror="
+                this.src = 'Download Sketsa Gambar Ular Tangga Edukatif.jfif'
+              "
+            />
+            <div id="tokens-layer"></div>
+          </div>
+        </div>
+
+        <!-- DASHBOARD -->
+        <div class="dashboard-wrapper">
+          <div class="card turn-card">
+            <h3>🎯 GILIRAN SAAT INI</h3>
+            <div id="current-turn-indicator" class="turn-indicator team-1-bg">
+              🔵 TIM GARUDA
+            </div>
+          </div>
+
+          <div class="card dice-card">
+            <div id="dice-display" class="dice">🎲</div>
+            <button
+              id="roll-btn"
+              class="btn btn-roll"
+              onclick="handleRollDice()"
+            >
+              🎲 LEMPAR DADU
+            </button>
+          </div>
+
+          <div class="card score-card">
+            <h3>🏆 SCOREBOARD</h3>
+            <div class="scoreboard-list" id="scoreboard-list"></div>
+          </div>
+
+          <div class="card history-card">
+            <h3>📜 CATATAN PERJALANAN</h3>
+            <div id="game-history-log" class="history-log"></div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- MODAL SOAL -->
+    <div id="question-modal" class="modal-overlay">
+      <div class="modal-box question-box">
+        <div class="question-header">
+          <span id="q-difficulty" class="badge">🟢 Mudah</span>
+          <div class="timer-badge">⏱️ <span id="timer-display">20</span>s</div>
+        </div>
+        <h3 id="q-title">🧠 TANTANGAN SOAL</h3>
+        <p id="q-text" class="question-text"></p>
+        <div id="q-options" class="options-grid"></div>
+        <div id="q-feedback" class="feedback-box hidden"></div>
+      </div>
+    </div>
+
+    <!-- MODAL PETUNJUK -->
+    <div id="instructions-modal" class="modal-overlay">
+      <div class="modal-box">
+        <h2>🎮 CARA BERMAIN</h2>
+        <ol class="instructions-list">
+          <li>Pilih jumlah tim (2-4 tim) dan masukkan nama tim.</li>
+          <li>Lempar dadu dan jawab soal dalam batas waktu.</li>
+          <li><strong>Jawaban Benar:</strong> Pion bergerak maju.</li>
+          <li><strong>Jawaban Salah:</strong> Pion tetap berada di tempat.</li>
+          <li><strong>Angka 6:</strong> Bonus 1x lemparan lagi.</li>
+          <li>Soal tersimpan secara awan (cloud database) secara otomatis.</li>
+        </ol>
+        <button
+          class="btn btn-primary"
+          onclick="toggleModal('instructions-modal', false)"
+        >
+          TUTUP
+        </button>
+      </div>
+    </div>
+
+    <!-- MODAL MODE GURU (MANAJEMEN SOAL CRUD & SETTINGS) -->
+    <div id="teacher-modal" class="modal-overlay">
+      <div class="modal-box teacher-box">
+        <h2>👨‍🏫 PANEL KONTROL GURU</h2>
+        <hr />
+        <br />
+
+        <!-- FORM TAMBAH / EDIT SOAL -->
+        <h3>📝 Tambah / Edit Soal</h3>
+        <form id="crud-form" onsubmit="saveQuestion(event)">
+          <input type="hidden" id="edit-q-index" value="-1" />
+          <div class="form-group">
+            <label>Pertanyaan:</label>
+            <textarea id="q-input-text" required rows="2"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Pilihan A:</label
+            ><input type="text" id="q-input-a" required />
+          </div>
+          <div class="form-group">
+            <label>Pilihan B:</label
+            ><input type="text" id="q-input-b" required />
+          </div>
+          <div class="form-group">
+            <label>Pilihan C:</label
+            ><input type="text" id="q-input-c" required />
+          </div>
+          <div class="form-group">
+            <label>Pilihan D:</label
+            ><input type="text" id="q-input-d" required />
+          </div>
+          <div class="form-group">
+            <label>Jawaban Benar:</label>
+            <select id="q-input-correct">
+              <option value="0">A</option>
+              <option value="1">B</option>
+              <option value="2">C</option>
+              <option value="3">D</option>
+            </select>
+            <label>Tingkat Kesulitan:</label>
+            <select id="q-input-diff">
+              <option value="🟢 Mudah">🟢 Mudah</option>
+              <option value="🟡 Sedang">🟡 Sedang</option>
+              <option value="🔴 Sulit">🔴 Sulit</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Penjelasan Ringkas:</label>
+            <input type="text" id="q-input-exp" required />
+          </div>
+          <button type="submit" class="btn btn-primary">
+            💾 SIMPAN KE CLOUD
+          </button>
+          <button
+            type="button"
+            class="btn btn-secondary"
+            onclick="resetCrudForm()"
+          >
+            BATAL
+          </button>
+        </form>
+
+        <br />
+        <hr />
+        <br />
+        <h3>📚 Daftar Bank Soal (<span id="total-q-count">0</span>)</h3>
+        <div id="questions-crud-list" class="crud-list"></div>
+
+        <br />
+        <hr />
+        <br />
+        <div class="tool-group">
+          <label>🖼️ Upload Papan Ular Tangga Kustom:</label>
+          <input
+            type="file"
+            id="board-upload"
+            accept="image/*"
+            onchange="handleBoardUpload(event)"
+          />
+        </div>
+        <div class="tool-group">
+          <label>⏱️ Atur Batas Waktu Soal (Detik):</label>
+          <input
+            type="number"
+            id="timer-setting"
+            value="20"
+            min="5"
+            max="60"
+            onchange="updateTimerSetting(this.value)"
+          />
+        </div>
+        <button
+          class="btn btn-primary"
+          onclick="toggleModal('teacher-modal', false)"
+        >
+          TUTUP
+        </button>
+      </div>
+    </div>
+
+    <!-- MODAL HASIL AKHIR -->
+    <div id="winner-modal" class="modal-overlay">
+      <div class="modal-box winner-box">
+        <h1>🏆 HASIL AKHIR PERMAINAN 🎁</h1>
+        <p>Selamat kepada seluruh tim!</p>
+        <div id="podium-container" class="podium-container"></div>
+        <button class="btn btn-primary" onclick="resetGameTotal()">
+          🔄 MAIN LAGI
+        </button>
+      </div>
+    </div>
+
+    <!-- FIREBASE SDK INTEGRATION -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
+    <script src="script.js"></script>
+  </body>
+</html>
