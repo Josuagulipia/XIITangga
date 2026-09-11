@@ -1,94 +1,422 @@
 // ==========================================
-// KONFIGURASI FIREBASE CLOUD DATABASE
-// ==========================================
-// Ganti objek firebaseConfig di bawah ini dengan API Key & Database URL dari Akun Firebase Anda:
-const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-  databaseURL: "https://YOUR_PROJECT_ID-default-rtdb.firebaseio.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT_ID.appspot.com",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID",
-};
-
-// Inisialisasi Firebase
-if (!firebase.apps.length) {
-  firebase.initializeApp(firebaseConfig);
-}
-const db = firebase.database();
-
-// ==========================================
-// DEFAULT BANK SOAL KOMPREHENSIF (MATERI DAYAK)
+// BANK SOAL KOMPREHENSIF (MATERI MOTIF DAYAK)
 // ==========================================
 const defaultQuestions = [
   {
-    q: "Apa fungsi utama dari motif pada sebuah karya seni dan kerajinan?",
+    q: "Motif adalah ....",
     options: [
-      "A. Menambah berat dan ketahanan benda",
-      "B. Membuat benda lebih indah, menarik, dan memiliki ciri khas",
-      "C. Mengubah bentuk fisik asli suatu benda",
-      "D. Menghilangkan fungsi praktis benda",
+      "A. benda yang digunakan untuk membuat kerajinan",
+      "B. pola, gambar, atau bentuk tertentu yang dibuat secara berulang sebagai hiasan",
+      "C. warna yang digunakan pada sebuah benda",
+      "D. teknik membuat sebuah benda",
     ],
     answer: 1,
     difficulty: "🟢 Mudah",
     explanation:
-      "Motif berfungsi membuat suatu benda menjadi lebih indah, menarik, dan memiliki ciri khas tertentu.",
+      "Motif adalah pola atau gambar yang dibuat berulang untuk memperindah suatu benda.",
     points: 10,
   },
   {
-    q: "Apa yang dimaksud dengan kegiatan merancang motif?",
+    q: "Tujuan utama penggunaan motif pada suatu benda adalah ....",
     options: [
-      "A. Menggambar bentuk secara eksak dan persis tanpa modifikasi",
-      "B. Kegiatan membuat atau menyusun ide gambar yang digunakan sebagai hiasan pada suatu benda",
-      "C. Mewarnai kain sesuai dengan standar tradisi secara baku",
-      "D. Meniru lukisan kuno tanpa mengubah garis utamanya",
+      "A. membuat benda menjadi lebih berat",
+      "B. membuat benda menjadi lebih mahal",
+      "C. memperindah tampilan benda agar lebih menarik",
+      "D. membuat benda lebih sulit digunakan",
+    ],
+    answer: 2,
+    difficulty: "🟢 Mudah",
+    explanation:
+      "Salah satu fungsi utama motif adalah membuat benda terlihat lebih indah dan menarik.",
+    points: 10,
+  },
+  {
+    q: "Berikut ini yang merupakan contoh motif dalam kehidupan sehari-hari adalah ....",
+    options: [
+      "A. motif batik pada pakaian",
+      "B. ukuran meja belajar",
+      "C. bentuk kursi",
+      "D. bahan pembuatan tas",
+    ],
+    answer: 0,
+    difficulty: "🟢 Mudah",
+    explanation:
+      "Motif dapat ditemukan dalam kehidupan sehari-hari, salah satunya pada kain atau pakaian batik.",
+    points: 10,
+  },
+  {
+    q: "Motif Dayak merupakan pola atau gambar khas yang berasal dari kebudayaan masyarakat ....",
+    options: ["A. Jawa", "B. Bali", "C. Papua", "D. Dayak di Pulau Kalimantan"],
+    answer: 3,
+    difficulty: "🟢 Mudah",
+    explanation:
+      "Motif Dayak merupakan bagian dari kebudayaan masyarakat Dayak yang berasal dari Kalimantan.",
+    points: 10,
+  },
+  {
+    q: "Motif Dayak tidak hanya dibuat untuk keindahan karena setiap motif dapat memiliki ....",
+    options: [
+      "A. harga jual yang tinggi",
+      "B. makna, filosofi, doa, dan harapan",
+      "C. ukuran yang sama",
+      "D. bentuk yang selalu sederhana",
     ],
     answer: 1,
     difficulty: "🟢 Mudah",
     explanation:
-      "Merancang motif adalah kegiatan membuat atau menyusun ide gambar yang akan digunakan sebagai hiasan.",
+      "Motif Dayak bukan sekadar hiasan. Di dalamnya terdapat pesan dan nilai kehidupan.",
     points: 10,
   },
   {
-    q: "Proses mengubah objek yang rumit menjadi bentuk hiasan yang lebih sederhana tanpa menghilangkan ciri khasnya disebut...",
+    q: "Salah satu benda yang dapat ditemukan menggunakan motif Dayak adalah ....",
     options: [
-      "A. Realisme visual",
-      "B. Menyederhanakan bentuk (Stilisasi)",
-      "C. Duplikasi total",
-      "D. Geometrisasi kaku",
+      "A. Rumah Betang",
+      "B. gedung perkantoran modern",
+      "C. komputer",
+      "D. kendaraan bermotor",
+    ],
+    answer: 0,
+    difficulty: "🟢 Mudah",
+    explanation:
+      "Motif Dayak dapat ditemukan pada berbagai benda budaya, salah satunya Rumah Betang.",
+    points: 10,
+  },
+  {
+    q: "Motif Dayak dapat diibaratkan seperti logo sekolah karena ....",
+    options: [
+      "A. keduanya selalu berwarna merah",
+      "B. keduanya hanya digunakan sebagai hiasan",
+      "C. keduanya memiliki pesan atau arti tertentu",
+      "D. keduanya dibuat menggunakan komputer",
+    ],
+    answer: 2,
+    difficulty: "🟢 Mudah",
+    explanation:
+      "Seperti logo sekolah, motif Dayak juga memiliki makna dan menjadi simbol identitas budaya.",
+    points: 10,
+  },
+  {
+    q: "Salah satu ciri khas motif Dayak adalah banyak menggunakan garis ....",
+    options: [
+      "A. lurus dan pendek saja",
+      "B. melengkung, berputar, dan saling menyambung",
+      "C. horizontal saja",
+      "D. vertikal saja",
     ],
     answer: 1,
     difficulty: "🟢 Mudah",
     explanation:
-      "Menyederhanakan bentuk (Stilisasi) mengubah objek rumit menjadi bentuk hias yang tetap mempertahankan ciri khasnya.",
+      "Garis melengkung dan saling menyambung merupakan salah satu ciri khas motif Dayak.",
     points: 10,
   },
   {
-    q: "Dalam karya tradisional Dayak, warna MERAH umumnya memberikan kesan...",
+    q: "Bentuk simetris pada motif Dayak berarti ....",
     options: [
-      "A. Bersih dan sederhana",
-      "B. Berani, kuat, dan bersemangat",
-      "C. Alami dan segar",
-      "D. Cerah dan hangat",
+      "A. bentuk kanan dan kiri hampir sama dan terlihat seimbang",
+      "B. motif hanya menggunakan satu warna",
+      "C. motif tidak memiliki pola",
+      "D. gambar dibuat secara acak",
+    ],
+    answer: 0,
+    difficulty: "🟢 Mudah",
+    explanation:
+      "Simetris berarti bagian kanan dan kiri memiliki bentuk yang hampir sama sehingga terlihat seimbang.",
+    points: 10,
+  },
+  {
+    q: "Banyaknya motif Dayak yang terinspirasi dari tumbuhan dan hewan disebabkan oleh ....",
+    options: [
+      "A. masyarakat Dayak menyukai gambar yang besar",
+      "B. masyarakat Dayak hidup sangat dekat dengan alam",
+      "C. tumbuhan lebih mudah digambar",
+      "D. hewan lebih mudah ditemukan di kota",
     ],
     answer: 1,
     difficulty: "🟢 Mudah",
-    explanation: "Warna merah memberikan kesan berani, kuat, dan bersemangat.",
+    explanation:
+      "Kedekatan dengan alam membuat tumbuhan dan hewan menjadi sumber inspirasi penting dalam motif Dayak.",
     points: 10,
   },
   {
-    q: "Bentuk tumbuhan yang melengkung atau menjalar dan sangat cocok untuk mengisi ruang kosong pada motif disebut...",
-    options: ["A. Batang pohon", "B. Sulur", "C. Duri", "D. Biji"],
+    q: "Berikut ini yang bukan merupakan contoh inspirasi alam dalam motif Dayak adalah ....",
+    options: ["A. daun", "B. ikan", "C. burung", "D. mobil"],
+    answer: 3,
+    difficulty: "🟢 Mudah",
+    explanation:
+      "Daun, ikan, dan burung berasal dari alam, sedangkan mobil merupakan benda modern buatan manusia.",
+    points: 10,
+  },
+  {
+    q: "Warna yang identik dengan motif Dayak antara lain ....",
+    options: [
+      "A. merah, hitam, putih, kuning, dan hijau",
+      "B. biru, abu-abu, dan cokelat saja",
+      "C. merah muda dan ungu saja",
+      "D. putih dan abu-abu saja",
+    ],
+    answer: 0,
+    difficulty: "🟢 Mudah",
+    explanation:
+      "Warna-warna merah, hitam, putih, kuning, dan hijau banyak ditemukan dan identik dengan motif Dayak.",
+    points: 10,
+  },
+  {
+    q: "Motif Dayak lebih banyak menggunakan bentuk tumbuhan, hewan, dan pola geometris daripada gambar manusia secara utuh. Hal ini menunjukkan bahwa ....",
+    options: [
+      "A. masyarakat Dayak tidak mengenal manusia",
+      "B. alam memiliki hubungan yang penting dengan kehidupan masyarakat Dayak",
+      "C. manusia tidak boleh digambar",
+      "D. tumbuhan lebih mahal daripada manusia",
+    ],
+    answer: 1,
+    difficulty: "🟡 Sedang",
+    explanation:
+      "Banyaknya bentuk tumbuhan dan hewan menunjukkan bahwa alam sangat dekat dengan kehidupan masyarakat Dayak.",
+    points: 10,
+  },
+  {
+    q: "Salah satu fungsi motif Dayak sebagai identitas budaya adalah ....",
+    options: [
+      "A. menunjukkan jati diri suatu budaya",
+      "B. menentukan harga sebuah benda",
+      "C. membuat benda lebih berat",
+      "D. menghilangkan fungsi benda",
+    ],
+    answer: 0,
+    difficulty: "🟢 Mudah",
+    explanation:
+      "Motif dapat menjadi tanda yang menunjukkan asal dan identitas suatu budaya.",
+    points: 10,
+  },
+  {
+    q: "Motif Dayak disebut sebagai warisan budaya karena ....",
+    options: [
+      "A. hanya dibuat oleh orang tua",
+      "B. diwariskan dari nenek moyang kepada generasi berikutnya",
+      "C. hanya boleh digunakan di museum",
+      "D. tidak boleh dikembangkan",
+    ],
     answer: 1,
     difficulty: "🟢 Mudah",
     explanation:
-      "Sulur merupakan bentuk tumbuhan melengkung/menjalar yang cocok mengisi ruang kosong pada pola.",
+      "Motif Dayak merupakan warisan budaya yang diteruskan dari generasi ke generasi.",
+    points: 10,
+  },
+  {
+    q: "Jika generasi muda tidak mau mempelajari motif Dayak, kemungkinan yang dapat terjadi adalah ....",
+    options: [
+      "A. motif menjadi semakin terkenal",
+      "B. motif dapat hilang atau tidak dikenal oleh generasi berikutnya",
+      "C. budaya menjadi semakin kuat",
+      "D. semua motif berubah menjadi modern",
+    ],
+    answer: 1,
+    difficulty: "🟡 Sedang",
+    explanation:
+      "Jika generasi muda tidak mempelajarinya, pengetahuan dan budaya tersebut dapat terlupakan.",
+    points: 10,
+  },
+  {
+    q: "Motif pakis terinspirasi dari tanaman yang banyak tumbuh di ....",
+    options: [
+      "A. gurun",
+      "B. hutan Kalimantan",
+      "C. pantai luar negeri",
+      "D. perkotaan",
+    ],
+    answer: 1,
+    difficulty: "🟢 Mudah",
+    explanation:
+      "Tanaman pakis banyak ditemukan di hutan Kalimantan dan kemudian menjadi salah satu inspirasi motif Dayak.",
+    points: 10,
+  },
+  {
+    q: "Makna utama yang terdapat pada motif pakis adalah ....",
+    options: [
+      "A. kemewahan dan kekayaan",
+      "B. kehidupan, pertumbuhan, dan semangat berkembang",
+      "C. kesedihan dan kehilangan",
+      "D. kekuasaan dan peperangan",
+    ],
+    answer: 1,
+    difficulty: "🟡 Sedang",
+    explanation:
+      "Pakis terus tumbuh sehingga digunakan sebagai simbol kehidupan dan semangat untuk berkembang.",
+    points: 10,
+  },
+  {
+    q: "Sikap seorang pelajar yang sesuai dengan filosofi motif pakis adalah ....",
+    options: [
+      "A. mudah menyerah ketika mendapat kesulitan",
+      "B. berhenti belajar ketika mendapat nilai rendah",
+      "C. terus belajar dan memperbaiki diri",
+      "D. menghindari tugas yang sulit",
+    ],
+    answer: 2,
+    difficulty: "🟡 Sedang",
+    explanation:
+      "Nilai motif pakis mengajarkan kita untuk terus tumbuh dan menjadi pribadi yang lebih baik.",
+    points: 10,
+  },
+  {
+    q: "Burung Enggang dianggap sebagai hewan yang mulia dan dihormati oleh masyarakat Dayak. Motif Burung Enggang melambangkan ....",
+    options: [
+      "A. kesedihan dan kelemahan",
+      "B. kebijaksanaan, kepemimpinan, kehormatan, dan kewibawaan",
+      "C. kemalasan dan ketakutan",
+      "D. persaingan dan permusuhan",
+    ],
+    answer: 1,
+    difficulty: "🟡 Sedang",
+    explanation:
+      "Burung Enggang dianggap mulia dan dihormati sehingga menjadi simbol berbagai nilai kepemimpinan.",
+    points: 10,
+  },
+  {
+    q: "Seorang ketua kelas selalu adil, mau mendengarkan pendapat teman, dan menjadi contoh yang baik. Sikap tersebut sesuai dengan nilai dari ....",
+    options: [
+      "A. motif pakis",
+      "B. motif naga",
+      "C. motif Burung Enggang",
+      "D. motif sulur",
+    ],
+    answer: 2,
+    difficulty: "🟡 Sedang",
+    explanation:
+      "Sikap adil, bijaksana, dan menjadi teladan sesuai dengan nilai yang terdapat pada motif Burung Enggang.",
+    points: 10,
+  },
+  {
+    q: "Dalam budaya Dayak, motif naga melambangkan ....",
+    options: [
+      "A. kekuatan dan perlindungan",
+      "B. kemalasan dan kelemahan",
+      "C. kesedihan dan kehilangan",
+      "D. perselisihan dan permusuhan",
+    ],
+    answer: 0,
+    difficulty: "🟡 Sedang",
+    explanation:
+      "Dalam budaya Dayak, naga memiliki makna positif sebagai simbol kekuatan, keberanian, dan perlindungan.",
+    points: 10,
+  },
+  {
+    q: "Contoh keberanian yang sesuai dengan nilai motif Naga Dayak adalah ....",
+    options: [
+      "A. berkelahi dengan teman",
+      "B. memaksa teman mengikuti keinginan kita",
+      "C. berani mengakui kesalahan",
+      "D. mengejek orang yang berbeda",
+    ],
+    answer: 2,
+    difficulty: "🟡 Sedang",
+    explanation:
+      "Keberanian tidak berarti berkelahi. Mengakui kesalahan dan melakukan hal yang benar juga merupakan keberanian.",
+    points: 10,
+  },
+  {
+    q: "Seorang siswa diajak temannya untuk menyontek saat ujian. Berdasarkan nilai motif Naga Dayak, tindakan yang tepat adalah ....",
+    options: [
+      "A. ikut menyontek agar mendapat nilai tinggi",
+      "B. menolak ajakan menyontek meskipun mendapat tekanan",
+      "C. meminta jawaban dari teman secara diam-diam",
+      "D. membiarkan teman menyontek jawaban kita",
+    ],
+    answer: 1,
+    difficulty: "🔴 Sulit",
+    explanation:
+      "Menolak menyontek merupakan contoh keberanian untuk mempertahankan kejujuran dan melakukan hal yang benar.",
+    points: 10,
+  },
+  {
+    q: "Motif sulur dan daun menggambarkan ....",
+    options: [
+      "A. persaingan manusia",
+      "B. hubungan antara manusia dan alam",
+      "C. kekuatan dalam peperangan",
+      "D. kemewahan hidup",
+    ],
+    answer: 1,
+    difficulty: "🟡 Sedang",
+    explanation:
+      "Bentuk sulur dan daun yang saling terhubung menggambarkan hubungan dan keseimbangan manusia dengan alam.",
+    points: 10,
+  },
+  {
+    q: "Jika manusia terus menebang hutan dan mencemari sungai, tindakan tersebut bertentangan dengan nilai yang terdapat dalam ....",
+    options: [
+      "A. motif sulur dan daun",
+      "B. motif naga saja",
+      "C. motif Burung Enggang saja",
+      "D. motif pakis saja",
+    ],
+    answer: 0,
+    difficulty: "🔴 Sulit",
+    explanation:
+      "Motif sulur dan daun mengajarkan manusia untuk menjaga hubungan yang baik dengan alam dan lingkungan.",
+    points: 10,
+  },
+  {
+    q: "Berikut ini merupakan nilai yang dapat dipelajari dari motif Dayak, KECUALI ....",
+    options: [
+      "A. mencintai budaya sendiri",
+      "B. menjaga kelestarian alam",
+      "C. bekerja sama dan hidup rukun",
+      "D. melupakan budaya sendiri agar terlihat modern",
+    ],
+    answer: 3,
+    difficulty: "🔴 Sulit",
+    explanation:
+      "Melupakan budaya bukanlah nilai yang diajarkan oleh motif Dayak. Justru kita harus mengenal dan melestarikannya.",
+    points: 10,
+  },
+  {
+    q: "Salah satu cara generasi muda melestarikan motif Dayak adalah ....",
+    options: [
+      "A. tidak mempelajarinya karena merupakan budaya lama",
+      "B. menyimpan semua karya di museum saja",
+      "C. membuat karya seni bertema motif Dayak",
+      "D. mengganti seluruh motif Dayak dengan motif luar negeri",
+    ],
+    answer: 2,
+    difficulty: "🟡 Sedang",
+    explanation:
+      "Membuat karya dengan motif Dayak merupakan salah satu cara generasi muda ikut melestarikan budaya.",
+    points: 10,
+  },
+  {
+    q: "Seorang siswa membuat desain tas dengan motif Dayak, kemudian menjelaskan makna motif tersebut melalui media sosial secara positif. Tindakan tersebut merupakan contoh ....",
+    options: [
+      "A. menghilangkan budaya",
+      "B. melestarikan budaya",
+      "C. mengubah budaya",
+      "D. menolak budaya",
+    ],
+    answer: 1,
+    difficulty: "🟡 Sedang",
+    explanation:
+      "Membuat karya dan memperkenalkan maknanya melalui media sosial secara positif membantu budaya tetap dikenal.",
+    points: 10,
+  },
+  {
+    q: "Kesimpulan yang paling tepat mengenai motif Dayak adalah ....",
+    options: [
+      "A. motif Dayak hanya berfungsi sebagai hiasan",
+      "B. motif Dayak hanya digunakan pada pakaian adat",
+      "C. motif Dayak merupakan gambar tanpa makna tertentu",
+      "D. motif Dayak merupakan bagian dari identitas budaya yang memiliki makna dan perlu dilestarikan",
+    ],
+    answer: 3,
+    difficulty: "🔴 Sulit",
+    explanation:
+      "Motif Dayak bukan hanya gambar atau hiasan, tetapi mengandung nilai kehidupan dan menjadi bagian dari identitas budaya Kalimantan.",
     points: 10,
   },
 ];
 
-// DATA POSISI ULAR & TANGGA
+// ==========================================
+// DATA ULAR DAN TANGGA
+// ==========================================
 const ladders = {
   2: 38,
   7: 14,
@@ -102,6 +430,7 @@ const ladders = {
   78: 98,
   87: 94,
 };
+
 const snakes = {
   16: 6,
   49: 11,
@@ -115,8 +444,11 @@ const snakes = {
   99: 80,
 };
 
+// ==========================================
 // GAME STATE MANAGEMENT
-let questionBank = [];
+// ==========================================
+let questionBank = [...defaultQuestions];
+
 let gameState = {
   totalTeams: 4,
   players: [
@@ -167,9 +499,10 @@ let gameState = {
 };
 
 // ==========================================
-// SOUND SYNTHESIZERS (WEB AUDIO API)
+// EFEK SUARA INTERAKTIF (WEB AUDIO API)
 // ==========================================
 let audioCtx = null;
+
 function initAudioContext() {
   if (!audioCtx) {
     audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -185,6 +518,7 @@ function playSound(type) {
   if (!audioCtx) return;
 
   const now = audioCtx.currentTime;
+
   try {
     if (type === "roll") {
       for (let i = 0; i < 4; i++) {
@@ -278,39 +612,23 @@ function playSound(type) {
         osc.stop(now + i * 0.12 + 0.3);
       });
     }
-  } catch (e) {}
+  } catch (e) {
+    console.error("Audio playback error:", e);
+  }
 }
 
 window.onload = function () {
-  listenToCloudQuestions();
   loadDarkModeSetting();
   checkSavedGame();
+  renderCrudList();
   document.body.addEventListener("click", () => initAudioContext(), {
     once: true,
   });
 };
 
 // ==========================================
-// FIREBASE SYNCHRONIZATION (REALTIME DB)
+// STORAGE PERSISTENCE
 // ==========================================
-function listenToCloudQuestions() {
-  const qRef = db.ref("questions");
-  qRef.on("value", (snapshot) => {
-    const data = snapshot.val();
-    if (data) {
-      questionBank = data;
-    } else {
-      questionBank = [...defaultQuestions];
-      db.ref("questions").set(defaultQuestions);
-    }
-    renderCrudList();
-  });
-}
-
-function saveCloudQuestions() {
-  db.ref("questions").set(questionBank);
-}
-
 function saveGameState() {
   localStorage.setItem("snake_game_state", JSON.stringify(gameState));
 }
@@ -332,7 +650,9 @@ function checkSavedGame() {
   }
 }
 
-// KOORDINAT GRID PAPAN (START = KOSONG/0)
+// ==========================================
+// KOORDINAT GRID PAPAN
+// ==========================================
 function getTileCoordinates(tileNumber) {
   if (tileNumber <= 0) return { x: -8, y: 92 };
   if (tileNumber > 100) tileNumber = 100;
@@ -340,18 +660,24 @@ function getTileCoordinates(tileNumber) {
   const zeroIndexed = tileNumber - 1;
   const row = Math.floor(zeroIndexed / 10);
   let col = zeroIndexed % 10;
-  if (row % 2 === 1) col = 9 - col;
+
+  if (row % 2 === 1) {
+    col = 9 - col;
+  }
 
   const x = col * 10 + 2.5;
   const y = (9 - row) * 10 + 2.5;
   return { x, y };
 }
 
+// ==========================================
+// KONTROL TIM & INISIALISASI
+// ==========================================
 function adjustTeamInputs(val) {
   const count = parseInt(val);
   for (let i = 1; i <= 4; i++) {
-    document.getElementById(`group-p${i}`).style.display =
-      i <= count ? "flex" : "none";
+    const group = document.getElementById(`group-p${i}`);
+    group.style.display = i <= count ? "flex" : "none";
   }
 }
 
@@ -385,6 +711,7 @@ function startGame() {
 function renderTokens() {
   const layer = document.getElementById("tokens-layer");
   layer.innerHTML = "";
+
   gameState.players.forEach((player, index) => {
     const token = document.createElement("div");
     token.className = `token ${player.color}`;
@@ -419,6 +746,9 @@ function updateUI() {
   turnElem.innerText = `🎯 GILIRAN: ${curP.name.toUpperCase()}`;
 }
 
+// ==========================================
+// MEKANISME DADU & SOAL
+// ==========================================
 function handleRollDice() {
   if (gameState.isRolling || gameState.isQuestionActive || gameState.isPaused)
     return;
@@ -430,6 +760,7 @@ function handleRollDice() {
   }
 
   gameState.isRolling = true;
+
   let rolls = 0;
   const diceElem = document.getElementById("dice-display");
   const interval = setInterval(() => {
@@ -527,6 +858,9 @@ function handleAnswer(selectedIndex, qData) {
   }, 2500);
 }
 
+// ==========================================
+// LOGIKA PERGERAKAN PION
+// ==========================================
 function movePlayer(playerIdx, steps) {
   const p = gameState.players[playerIdx];
   let target = p.pos + steps;
@@ -616,7 +950,9 @@ function nextTurn() {
   saveGameState();
 }
 
-// MANAJEMEN SOAL (CRUD MODE GURU VERSI CLOUD)
+// ==========================================
+// MANAJEMEN SOAL (CRUD MODE GURU)
+// ==========================================
 function saveQuestion(e) {
   e.preventDefault();
   const editIdx = parseInt(document.getElementById("edit-q-index").value);
@@ -640,9 +976,9 @@ function saveQuestion(e) {
     questionBank.push(newQ);
   }
 
-  saveCloudQuestions();
+  renderCrudList();
   resetCrudForm();
-  alert("Soal berhasil disimpan ke Firebase Cloud!");
+  alert("Soal berhasil disimpan ke sesi permainan ini!");
 }
 
 function renderCrudList() {
@@ -690,7 +1026,7 @@ function editQuestion(idx) {
 function deleteQuestion(idx) {
   if (confirm("Hapus soal ini dari daftar?")) {
     questionBank.splice(idx, 1);
-    saveCloudQuestions();
+    renderCrudList();
   }
 }
 
@@ -699,7 +1035,9 @@ function resetCrudForm() {
   document.getElementById("edit-q-index").value = "-1";
 }
 
+// ==========================================
 // UTILS & SETTINGS
+// ==========================================
 function toggleDarkMode() {
   gameState.darkMode = !gameState.darkMode;
   document.body.classList.toggle("dark-mode", gameState.darkMode);
